@@ -1,0 +1,10 @@
+bin/
+.git/
+.env
+**/README.md
+LICENCE
+Makefile
+compose.yaml
+Dockerfile
+.dockerignore
+.gitignore
