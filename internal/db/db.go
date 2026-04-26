@@ -40,6 +40,6 @@ func Connect(ctx context.Context, config config.DBConfig) (*pgxpool.Pool, error)
 		return nil, err
 	}
 
-	log.Printf("Connected to database %s on %s:%s", config.Name, config.Host, config.Port)
+	log.Printf("connected to database %s on %s:%s", config.Name, config.Host, config.Port)
 	return pool, nil
 }
