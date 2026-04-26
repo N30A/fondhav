@@ -14,15 +14,10 @@ type fund struct {
 	HoldingsCount  int
 }
 
-func (f fund) toModel(dbholdings []holding) models.Fund {
+func (f fund) toModel() models.Fund {
 	benchmark := ""
 	if f.BenchmarkIndex != nil {
 		benchmark = *f.BenchmarkIndex
-	}
-
-	holdings := make([]models.Holding, len(dbholdings))
-	for i, holding := range dbholdings {
-		holdings[i] = holding.toModel()
 	}
 
 	return models.Fund{
@@ -30,9 +25,21 @@ func (f fund) toModel(dbholdings []holding) models.Fund {
 		Name:           f.Name,
 		BenchmarkIndex: benchmark,
 		AsOfDate:       f.AsOfDate,
-		Holdings:       holdings,
+		Holdings:       []models.Holding{},
 		HoldingsCount:  f.HoldingsCount,
 	}
+}
+
+func (f fund) toModelWithHoldings(holdings []holding) models.Fund {
+	model := f.toModel()
+	newHoldings := make([]models.Holding, len(holdings))
+
+	for i, holding := range holdings {
+		newHoldings[i] = holding.toModel()
+	}
+
+	model.Holdings = newHoldings
+	return model
 }
 
 type holding struct {
