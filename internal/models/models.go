@@ -10,6 +10,7 @@ type Fund struct {
 	BenchmarkIndex string
 	AsOfDate       time.Time
 	Holdings       []Holding
+	HoldingsCount  int
 }
 
 type Holding struct {

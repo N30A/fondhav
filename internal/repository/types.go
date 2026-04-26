@@ -11,6 +11,7 @@ type fund struct {
 	Name           string
 	BenchmarkIndex *string
 	AsOfDate       time.Time
+	HoldingsCount  int
 }
 
 func (f fund) toModel(dbholdings []holding) models.Fund {
@@ -30,6 +31,7 @@ func (f fund) toModel(dbholdings []holding) models.Fund {
 		BenchmarkIndex: benchmark,
 		AsOfDate:       f.AsOfDate,
 		Holdings:       holdings,
+		HoldingsCount:  f.HoldingsCount,
 	}
 }
 

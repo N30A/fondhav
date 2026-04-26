@@ -88,6 +88,7 @@ func TestFundToModel(t *testing.T) {
 		Name:           "PLUS Allabolag Sverige Index",
 		BenchmarkIndex: &benchmark,
 		AsOfDate:       time.Date(2026, 04, 26, 12, 0, 0, 0, time.UTC),
+		HoldingsCount:  1,
 	}
 
 	got := fund.toModel(holdings)
@@ -106,6 +107,7 @@ func TestFundToModel(t *testing.T) {
 				WeightPercent: 5.0,
 			},
 		},
+		HoldingsCount: 1,
 	}
 
 	if !reflect.DeepEqual(got, want) {
@@ -115,13 +117,13 @@ func TestFundToModel(t *testing.T) {
 
 func TestFundToModelNoHoldings(t *testing.T) {
 	holdings := []holding{}
-
 	benchmark := "SIX Portfolio Return Index"
 	fund := fund{
 		ISIN:           "SE0014991535",
 		Name:           "PLUS Allabolag Sverige Index",
 		BenchmarkIndex: &benchmark,
 		AsOfDate:       time.Date(2026, 04, 26, 12, 0, 0, 0, time.UTC),
+		HoldingsCount:  0,
 	}
 
 	got := fund.toModel(holdings)
@@ -132,6 +134,7 @@ func TestFundToModelNoHoldings(t *testing.T) {
 		BenchmarkIndex: "SIX Portfolio Return Index",
 		AsOfDate:       time.Date(2026, 04, 26, 12, 0, 0, 0, time.UTC),
 		Holdings:       []models.Holding{},
+		HoldingsCount:  0,
 	}
 
 	if !reflect.DeepEqual(got, want) {
